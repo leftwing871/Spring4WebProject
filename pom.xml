@@ -33,6 +33,13 @@
 			<artifactId>spring-context</artifactId>
 			<version>4.3.17.RELEASE</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.3.17.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 </project>

@@ -1,11 +1,12 @@
 package myspring.di.xml.test;
-
-import org.junit.Assert;
+//static import
+import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import myspring.di.xml.Hello;
+import myspring.di.xml.Printer;
 
 /*
  * Junit을 사용한 단위테스트 클래스
@@ -22,6 +23,13 @@ public class HelloBeanTest {
 		Hello hello2 = factory.getBean("hello", Hello.class);
 		System.out.println(hello1 == hello2);
 		//2-1. Assert 클래스의 assertSame()을 사용하여 주소비교
-		Assert.assertSame(hello1, hello2);//true
+		assertSame(hello1, hello2);//true
+		//3. setName()를 컨테이너가 호출했는지 확인하기 위해 sayHello() 호출
+		assertEquals("Hello 스프링", hello1.sayHello());
+		//4. setPrinter()를 컨테이너가 호출했는지 확인하기 위해서 print() 호출
+		hello1.print();
+		//5. IoC 컨테이너에게 StringPrinter bean을 요청
+		Printer printer = factory.getBean("sPrinter", Printer.class);
+		assertEquals("Hello 스프링", printer.toString());
 	}
 }
