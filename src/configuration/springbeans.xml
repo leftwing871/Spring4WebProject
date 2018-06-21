@@ -23,6 +23,13 @@
 		<!-- constructor injection -->
 		<constructor-arg index="0" value="생성자" />
 		<constructor-arg index="1" ref="cPrinter" />
+		<property name="names">
+			<list>
+				<value>홍길동</value>
+				<value>둘리</value>
+				<value>영희</value>
+			</list>
+		</property>
 	</bean>
 	
 </beans>

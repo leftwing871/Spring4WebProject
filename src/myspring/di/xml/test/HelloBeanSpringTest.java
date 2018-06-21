@@ -1,5 +1,7 @@
 package myspring.di.xml.test;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,5 +24,10 @@ public class HelloBeanSpringTest {
 	public void hello() {
 		Assert.assertEquals("Hello »ý¼ºÀÚ", hello.sayHello());
 		hello.print();
+		
+		List<String> names = hello.getNames();
+		for (String value : names) {
+			System.out.println(value);
+		}
 	}
 }
