@@ -2,9 +2,29 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-
+	<!-- properties file 정보 설정 -->
+	<context:property-placeholder 
+		location="classpath:configuration/db.properties"/>
+	
+	<!-- DataSource DBCP Implemetation 객체 등록 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
+		p:driverClassName="${db.driver}"
+		p:url="${db.url}"
+		p:username="${db.username}"
+		p:password="${db.password}"
+	/>
+	 
+	<!-- DataSource Simple Implementation 객체 등록  -->	
+	<bean id="dataSourceOld" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@192.168.0.140:1521:xe" />
+		<property name="username" value="scott" />
+		<property name="password" value="tiger" />
+	</bean>
+	
 	<!-- StringPrinter 클래스를 bean으로 등록 -->
 	<bean id="sPrinter" class="myspring.di.xml.StringPrinter" />
 	<!-- ConsolePrinter 클래스를 bean으로 등록 -->
