@@ -3,6 +3,7 @@ package myspring.di.xml.test;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.junit.Assert;
@@ -24,7 +25,8 @@ public class HelloBeanSpringTest {
 	@Qualifier("helloC")
 	Hello hello;
 	
-	@Autowired
+	//@Autowired
+	@Resource(name="dataSource")
 	DataSource dataSource;
 	
 	@Test

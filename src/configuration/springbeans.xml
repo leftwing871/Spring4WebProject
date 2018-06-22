@@ -5,6 +5,26 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- Bean Auto Scanning 설정 -->
+	<context:component-scan base-package="myspring.user" />
+	
+	<!-- MyBatis-Spring 설정 -->
+	<!-- SqlSessionTemplate 설정 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	<!-- SqlSessionFactoryBean 설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" 
+			value="classpath:configuration/SqlMapConfig.xml" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:configuration/UserMapper.xml</value>
+				<value>classpath:configuration/StudentMapper.xml</value>
+			</list>
+		</property>
+	</bean>
 	<!-- properties file 정보 설정 -->
 	<context:property-placeholder 
 		location="classpath:configuration/db.properties"/>
@@ -18,7 +38,8 @@
 	/>
 	 
 	<!-- DataSource Simple Implementation 객체 등록  -->	
-	<bean id="dataSourceOld" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	<bean id="dataSourceOld" 
+	class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@192.168.0.140:1521:xe" />
 		<property name="username" value="scott" />
